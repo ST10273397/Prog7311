@@ -4,35 +4,68 @@
     ViewData["Title"] = "Login";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome!</h1>
-    <h1 class="display-4">Please Login</h1>
+<div class="d-flex justify-content-center align-items-center min-vh-100 bg-light">
+    <div class="card p-4 shadow-sm" style="min-width: 320px; max-width: 400px; width: 100%;">
+        <h1 class="display-5 text-center mb-3">Welcome!</h1>
+        <h2 class="h4 text-center mb-4 text-secondary">Please Login</h2>
 
+        <form method="post" novalidate>
+            <div asp-validation-summary="All" class="alert alert-danger d-none" id="validationSummary"></div>
 
-    <form method = "post" class="w-25 mx-auto text-start mt-4">
-        <div asp-asp-validation-summary="All" class="text-danger"></div>
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label"></label>
+                <input asp-for="Email" class="form-control @(ViewData.ModelState["Email"]?.Errors.Count > 0 ? "is-invalid" : "")" aria-describedby="emailHelp" />
+                <div class="invalid-feedback" asp-validation-for="Email"></div>
+            </div>
 
-        <div class="mb-3">
-            <label class="form-label">Email:</label>
-            <input asp-for = "Email" class="form-control"/>
-            <span asp-validation-formaction="Email" class="text-danger"></span>
-        </div>
+            <div class="mb-3">
+                <label asp-for="Password" class="form-label"></label>
+                <div class="input-group">
+                    <input asp-for="Password" type="password" class="form-control @(ViewData.ModelState["Password"]?.Errors.Count > 0 ? "is-invalid" : "")" id="passwordInput" />
+                    <button class="btn btn-outline-secondary" type="button" id="togglePassword" tabindex="-1" aria-label="Toggle password visibility">
+                        <i class="bi bi-eye" id="togglePasswordIcon"></i>
+                    </button>
+                </div>
+                <div class="invalid-feedback" asp-validation-for="Password"></div>
+            </div>
 
-        <div class="mb-3">
-            <label class="form-label">Password:</label>
-            <input asp-for = "Password" type="password" class="form-control"/>
-            <span asp-validation-for="Password" class="text-danger"></span>
-        </div>
+            <button type="submit" class="btn btn-success w-100 fw-semibold mb-3" style="transition: background-color 0.3s ease;">
+                Login
+            </button>
 
-        <button type = "submit" class="btn btn-success w-100">Login</button>
-
-        @if (!string.IsNullOrEmpty(Model.ErrorMessage))
-        {
-            <p style="color:red">@Model.ErrorMessage</p>
-        }
-    </form>
+            @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+            {
+                <div class="alert alert-danger mt-3" role="alert">
+                    @Model.ErrorMessage
+                </div>
+            }
+        </form>
+    </div>
 </div>
 
-@section Scripts{
-    <partial name ="_ValidationScriptsPartial" />
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        // Toggle password visibility
+        const togglePasswordBtn = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('passwordInput');
+
+        togglePasswordBtn.addEventListener('click', () => {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+
+            // Toggle eye icon
+            togglePasswordBtn.querySelector('i').classList.toggle('bi-eye');
+            togglePasswordBtn.querySelector('i').classList.toggle('bi-eye-slash');
+        });
+
+        // Show or hide validation summary dynamically
+        const validationSummary = document.getElementById('validationSummary');
+        const validationErrors = document.querySelectorAll('.validation-summary-errors li');
+
+        if (validationErrors.length > 0) {
+            validationSummary.classList.remove('d-none');
+            validationSummary.innerHTML = '<ul>' + [...validationErrors].map(e => `<li>${e.textContent}</li>`).join('') + '</ul>';
+        }
+    </script>
 }

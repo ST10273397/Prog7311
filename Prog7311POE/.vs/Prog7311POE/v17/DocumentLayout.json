@@ -3,8 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\nicho\\OneDrive\\Documents\\GitHub\\Prog7311\\Prog7311POE\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D4CF542F-F502-4B55-AD5E-57D98B486401}|Prog7311POE\\Prog7311POE.csproj|c:\\users\\nicho\\onedrive\\documents\\github\\prog7311\\prog7311poe\\prog7311poe\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D4CF542F-F502-4B55-AD5E-57D98B486401}|Prog7311POE\\Prog7311POE.csproj|solutionrelative:prog7311poe\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D4CF542F-F502-4B55-AD5E-57D98B486401}|Prog7311POE\\Prog7311POE.csproj|c:\\users\\nicho\\onedrive\\documents\\github\\prog7311\\prog7311poe\\prog7311poe\\pages\\home.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D4CF542F-F502-4B55-AD5E-57D98B486401}|Prog7311POE\\Prog7311POE.csproj|solutionrelative:prog7311poe\\pages\\home.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D4CF542F-F502-4B55-AD5E-57D98B486401}|Prog7311POE\\Prog7311POE.csproj|c:\\users\\nicho\\onedrive\\documents\\github\\prog7311\\prog7311poe\\prog7311poe\\pages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D4CF542F-F502-4B55-AD5E-57D98B486401}|Prog7311POE\\Prog7311POE.csproj|solutionrelative:prog7311poe\\pages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -22,15 +26,28 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\nicho\\OneDrive\\Documents\\GitHub\\Prog7311\\Prog7311POE\\Prog7311POE\\Pages\\Index.cshtml",
+              "RelativeDocumentMoniker": "Prog7311POE\\Pages\\Index.cshtml",
+              "ToolTip": "C:\\Users\\nicho\\OneDrive\\Documents\\GitHub\\Prog7311\\Prog7311POE\\Prog7311POE\\Pages\\Index.cshtml",
+              "RelativeToolTip": "Prog7311POE\\Pages\\Index.cshtml",
+              "ViewState": "AQIAACEAAAAAAAAAAAAAADEAAAA/AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-24T20:45:37.287Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "AppDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\nicho\\OneDrive\\Documents\\GitHub\\Prog7311\\Prog7311POE\\Prog7311POE\\Data\\AppDbContext.cs",
-              "RelativeDocumentMoniker": "Prog7311POE\\Data\\AppDbContext.cs",
-              "ToolTip": "C:\\Users\\nicho\\OneDrive\\Documents\\GitHub\\Prog7311\\Prog7311POE\\Prog7311POE\\Data\\AppDbContext.cs",
-              "RelativeToolTip": "Prog7311POE\\Data\\AppDbContext.cs",
-              "ViewState": "AQIAAAcAAAAAAAAAAAAzwBYAAAAkAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-14T21:46:26.059Z",
+              "Title": "Home.cshtml",
+              "DocumentMoniker": "C:\\Users\\nicho\\OneDrive\\Documents\\GitHub\\Prog7311\\Prog7311POE\\Prog7311POE\\Pages\\Home.cshtml",
+              "RelativeDocumentMoniker": "Prog7311POE\\Pages\\Home.cshtml",
+              "ToolTip": "C:\\Users\\nicho\\OneDrive\\Documents\\GitHub\\Prog7311\\Prog7311POE\\Prog7311POE\\Pages\\Home.cshtml",
+              "RelativeToolTip": "Prog7311POE\\Pages\\Home.cshtml",
+              "ViewState": "AQIAAAgAAAAAAAAAAAAYwGIAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-24T20:44:04.867Z",
               "EditorCaption": ""
             }
           ]

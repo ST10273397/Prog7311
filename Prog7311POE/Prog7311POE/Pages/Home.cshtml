@@ -6,156 +6,93 @@
     var role = User.FindFirst("http://schemas.microsoft.com/ws/2008/06/identity/claims/role")?.Value;
 }
 
-<h2>Welcome, @role!</h2>
+<h2 class="my-4 text-primary">Welcome, @role!</h2>
 
-<form method="get" class="mb-3">
-    <div class="row g-2 align-items-center">
-        <!-- Search Term -->
-        <div class="col-md-4">
-            <label for="searchTerm" class="form-label">Search by name or category</label>
-            <input type="text" id="searchTerm" name="searchTerm" class="form-control" />
-        </div>
-
-        <!-- Start Date -->
-        <div class="col-md-3">
-            <label for="startDate" class="form-label">From</label>
-            <input type="date" id="startDate" name="startDate" class="form-control" />
-        </div>
-
-        <!-- End Date -->
-        <div class="col-md-3">
-            <label for="endDate" class="form-label">To</label>
-            <input type="date" id="endDate" name="endDate" class="form-control" />
-        </div>
-    </div>
-
-    <!-- Search Button and Hint Message -->
-    <div class="mt-3">
-        <button type="submit" class="btn btn-outline-primary">Search</button>
-        <p class="form-text text-muted mt-1">
-            Press again with no fields entered to display all farmers and their products.
+<div class="card mb-4 shadow-sm">
+    <div class="card-body">
+        <h5 class="card-title"><i class="bi bi-search"></i> Filter Products</h5>
+        <form method="get" class="row gy-3">
+            <div class="col-md-4">
+                <label for="searchTerm" class="form-label">Search by name or category</label>
+                <input type="text" id="searchTerm" name="searchTerm" class="form-control" placeholder="e.g. Apples, Dairy..." />
+            </div>
+            <div class="col-md-3">
+                <label for="startDate" class="form-label">From</label>
+                <input type="date" id="startDate" name="startDate" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <label for="endDate" class="form-label">To</label>
+                <input type="date" id="endDate" name="endDate" class="form-control" />
+            </div>
+            <div class="col-md-2 d-flex align-items-end">
+                <button type="submit" class="btn btn-outline-primary w-100">
+                    <i class="bi bi-search"></i> Search
+                </button>
+            </div>
+        </form>
+        <p class="form-text text-muted mt-2">
+            Leave all fields empty and click Search to view everything.
         </p>
     </div>
-</form>
+</div>
 
 @if (role == "Employee")
 {
-    @foreach (var farmer in Model.Farmers)
-    {
-        <div class="card mb-3">
-            <div class="card-header">
-                <strong>@farmer.FullName</strong> (Email: @farmer.Email)
-            </div>
-            <ul class="list-group list list-group-flush">
-                @foreach (var product in farmer.Products)
-                {
-                    <li class="list-group-item d-flex justify-content-between">
-                        <span>
-                            <strong>@product.Name</strong> - @product.Category (Produced on @product.productionDate.ToShortDateString())
-                        </span>
-                    </li>
-                }
-            </ul>
-        </div>
-    }
-    @if (!Model.Farmers.Any())
-    {
-        <p class="text-muted">No results found. Try a different search term or date range.</p>
-    }
-    <button class="btn btn-success mb-4" data-bs-toggle="modal" data-bs-target="#addFarmerModal">Add Farmer</button>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4>Farmers & Their Products</h4>
+        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addFarmerModal">
+            <i class="bi bi-person-plus"></i> Add Farmer
+        </button>
+    </div>
 
+    @if (Model.Farmers.Any())
+    {
+        @foreach (var farmer in Model.Farmers)
+        {
+            <div class="card mb-3 shadow-sm">
+                <div class="card-header bg-light">
+                    <strong>@farmer.FullName</strong>
+                    <span class="text-muted">(Email: @farmer.Email)</span>
+                </div>
+                <ul class="list-group list-group-flush">
+                    @foreach (var product in farmer.Products)
+                    {
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>
+                                <strong>@product.Name</strong>
+                                <span class="badge bg-secondary">@product.Category</span>
+                                <small class="text-muted">Produced on @product.productionDate.ToShortDateString()</small>
+                            </span>
+                        </li>
+                    }
+                </ul>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="alert alert-warning">No results found. Try different filters.</div>
+    }
 }
 else if (role == "Farmer")
 {
-    <h3>Your Products</h3>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4>Your Products</h4>
+        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createProductModal">
+            <i class="bi bi-box-seam"></i> Add Product
+        </button>
+    </div>
+
     <ul class="list-group">
         @foreach (var product in Model.Products)
         {
             <li class="list-group-item d-flex justify-content-between">
                 <span>
-                    <strong>@product.Name</strong> - @product.Category (@product.productionDate.ToShortDateString())
+                    <strong>@product.Name</strong>
+                    <span class="badge bg-info text-dark">@product.Category</span>
+                    <small class="text-muted">(@product.productionDate.ToShortDateString())</small>
                 </span>
             </li>
         }
     </ul>
-<button class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#createProductModal">Add Product</button>
-
-}
-
-<!-- Create Product Modal -->
-<div class="modal fade" id="createProductModal" tabindex="-1" aria-labelledby="createProductModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form method="post" asp-page-handler="CreateProduct">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="createProductModalLabel">Add New Product</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label>Name</label>
-                        <input name="Name" class="form-control" />
-                    </div>
-                    <div class="mb-3">
-                        <label>Category</label>
-                        <input name="Category" class="form-control" />
-                    </div>
-                    <div class="mb-3">
-                        <label>Production Date</label>
-                        <input type="date" name="ProductionDate" class="form-control" />
-                    </div>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">Create</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<!-- Add Farmer Modal -->
-<div class="modal fade" id="addFarmerModal" tabindex="-1" aria-labelledby="addFarmerModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form method="post" asp-page-handler="AddFarmer">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addFarmerModalLabel">Add New Farmer</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label>Full Name</label>
-                        <input name="FullName" class="form-control" />
-                    </div>
-                    <div class="mb-3">
-                        <label>Email</label>
-                        <input name="Email" type="email" class="form-control" />
-                    </div>
-                    <div class="mb-3">
-                        <label>Password</label>
-                        <input name="Password" type="password" class="form-control" />
-                    </div>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">Create</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-@section Scripts {
-    <script>
-        // Optional: auto-focus the first input in modal
-        const addFarmerModal = document.getElementById('addFarmerModal');
-        addFarmerModal?.addEventListener('shown.bs.modal', () => {
-            addFarmerModal.querySelector('input')?.focus();
-        });
-    </script>
 }
